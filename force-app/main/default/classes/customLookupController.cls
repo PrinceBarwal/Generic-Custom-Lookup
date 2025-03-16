@@ -4,7 +4,7 @@ public with sharing class customLookupController {
         List<sObject> sObjectList = new List<sObject>();
         if(String.isNotBlank(searchKey)){
             String key = '%' + searchKey + '%';
-            String queryString = 'Select Id, Name from ' + objectApiName + 'Where Name Like :key';
+            String queryString = 'Select Id, Name from ' + objectApiName + ' Where Name like :key';
             sObjectList = Database.query(queryString, AccessLevel.USER_MODE);
         }
         return sObjectList;
