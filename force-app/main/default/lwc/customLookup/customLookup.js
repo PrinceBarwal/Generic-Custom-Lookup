@@ -6,6 +6,7 @@ export default class CustomLookup extends LightningElement {
     apiName = "Account";
     searchValue = "Test";
     objectLabel  = 'Account';
+    iconName = 'standard:account';
 
     @wire(customLookupController, 
         {
@@ -13,4 +14,8 @@ export default class CustomLookup extends LightningElement {
             searchKey : '$searchValue'
         }
     )outputs
+
+    // get showOutput(){
+    //     return this.outputs.data ? true : false;
+    // }
 }
