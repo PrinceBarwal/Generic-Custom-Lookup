@@ -12,6 +12,7 @@ export default class CustomLookup extends LightningElement {
         selectedId : "",
         selectedName : ""
     }
+    displayOptions = false;
 
     @wire(customLookupController, 
         {
@@ -29,18 +30,33 @@ export default class CustomLookup extends LightningElement {
         let enteredValue = event.target.value;
         this.delayTimeOut = setTimeout(() => {
             this.searchValue = enteredValue;
+            this.displayOptions = true;
         } , DELAY);
     }
 
     clickHandler(event){
         let selectedId = event.currentTarget.dataset.item;
         console.log('select Id',selectedId);
-        let outputRecord = this.outputs.finds(
+        let outputRecord = this.outputs.data.find(
             (currItem) => currItem.Id === selectedId
         );
         this.selectedRecord = {
             selectedId : outputRecord.Id,
             selectedName : outputRecord.Name
-        }
+        };
+        this.displayOptions = false;
     }   
+
+    get isRecordSelected(){
+        return this.selectedRecord.selectedId === '' ? false : true;
+    }
+
+    removalSelectionHandler(event){
+        console.log('event called');
+        this.selectedRecord = {
+            selectedId : "",
+            selectedName : ""
+        };
+        this.displayOptions = false;
+    }
 }
