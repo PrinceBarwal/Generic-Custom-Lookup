@@ -40,7 +40,9 @@
                                 role="presentation">
                                 <template for:each={outputs.data} for:item="output">
                                     <li key={output.Id} role="presentation"
-                                        class="slds-listbox__item">
+                                        class="slds-listbox__item"
+                                        data-item={output.Id}
+                                        onclick={clickHandler}>
                                         <div aria-selected="true" id="option25"
                                             class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta slds-has-focus"
                                             role="option" tabindex="0">

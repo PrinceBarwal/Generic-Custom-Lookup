@@ -4,10 +4,14 @@ const DELAY = 300;
 export default class CustomLookup extends LightningElement {
 
     apiName = "Account";
-    searchValue = "Test";
+    searchValue;
     objectLabel  = 'Account';
     iconName = 'standard:account';
     delayTimeOut;
+    selectedRecord = {
+        selectedId : "",
+        selectedName : ""
+    }
 
     @wire(customLookupController, 
         {
@@ -27,4 +31,16 @@ export default class CustomLookup extends LightningElement {
             this.searchValue = enteredValue;
         } , DELAY);
     }
+
+    clickHandler(event){
+        let selectedId = event.currentTarget.dataset.item;
+        console.log('select Id',selectedId);
+        let outputRecord = this.outputs.finds(
+            (currItem) => currItem.Id === selectedId
+        );
+        this.selectedRecord = {
+            selectedId : outputRecord.Id,
+            selectedName : outputRecord.Name
+        }
+    }   
 }
